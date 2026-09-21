@@ -207,10 +207,14 @@ function scanGitHistory() {
     .split(/\r?\n/)
     .filter((line) => line.startsWith('+') && !line.startsWith('+++'));
 
+  // Strong patterns (real secrets) are checked everywhere including history.
+  // Weak patterns (assignment-shaped) are only checked in the working tree
+  // where we can exclude test files; they are too noisy in git history
+  // because test fixtures like 'password: "test-password"' trigger them.
   return scanText({
     text: addedLines.join('\n'),
     label: 'git history (added lines)',
-    includeWeak: true,
+    includeWeak: false,
   });
 }
 
