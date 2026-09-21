@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Practice-Day Outfit Caller</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>Practice-Day Outfit Caller</h1>
+      <span class="spacer"></span>
+      <span class="who" id="session-label"></span>
+      <button class="secondary" id="logout-button" hidden type="button">Log out</button>
+    </header>
+
+    <main>
+      <div id="global-alert"></div>
+
+      <!-- ---------------------------------------------------------------- -->
+      <!-- Authentication                                                    -->
+      <!-- ---------------------------------------------------------------- -->
+      <section class="view" id="auth-view" hidden>
+        <div class="card" style="max-width: 470px; margin: 0 auto">
+          <h2 id="auth-title">Coach sign in</h2>
+          <p class="tiny">
+            One account per coach. Your teams are private to you.
+          </p>
+          <div id="auth-alert"></div>
+          <form id="auth-form" novalidate>
+            <div class="field">
+              <label for="auth-email">Email</label>
+              <input id="auth-email" type="email" autocomplete="email" required />
+            </div>
+            <div class="field">
+              <label for="auth-password">Password <span class="tiny">(8+ characters)</span></label>
+              <input id="auth-password" type="password" autocomplete="current-password" required />
+            </div>
+            <div class="field" id="display-name-field" hidden>
+              <label for="auth-display-name">Your name</label>
+              <input id="auth-display-name" type="text" autocomplete="name" />
+            </div>
+            <div class="actions">
+              <button id="auth-submit" type="submit">Sign in</button>
+              <button id="auth-toggle" class="secondary" type="button">Create an account</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- ---------------------------------------------------------------- -->
+      <!-- Dashboard                                                        -->
+      <!-- ---------------------------------------------------------------- -->
+      <section class="view" id="dashboard-view" hidden>
+        <div class="grid">
+          <!-- Owned teams + create form -->
+          <div>
+            <div class="card">
+              <h2>My teams</h2>
+              <ul class="team-list" id="team-list"></ul>
+              <div id="team-list-state"></div>
+            </div>
+
+            <div class="card">
+              <h2>Add a team</h2>
+              <div id="create-alert"></div>
+              <form id="create-team-form" novalidate>
+                <div class="field">
+                  <label for="team-name">Team name</label>
+                  <input id="team-name" type="text" placeholder="U10 Thunder" required />
+                </div>
+                <div class="field">
+                  <label for="team-location">Practice field (city, place or address)</label>
+                  <input id="team-location" type="text" placeholder="Cedar Park, Texas" required />
+                </div>
+                <div class="row">
+                  <div class="field">
+                    <label for="team-lat">Latitude (optional)</label>
+                    <input id="team-lat" type="number" step="any" placeholder="30.5052" />
+                  </div>
+                  <div class="field">
+                    <label for="team-lon">Longitude (optional)</label>
+                    <input id="team-lon" type="number" step="any" placeholder="-97.8203" />
+                  </div>
+                </div>
+                <p class="tiny">
+                  Fill in either a place name or a latitude/longitude pair. The server
+                  geocodes place names and validates the coordinates again.
+                </p>
+                <div class="field">
+                  <label>Practice days</label>
+                  <div class="days" id="practice-days"></div>
+                </div>
+                <div class="field">
+                  <label for="team-time">Practice start time</label>
+                  <input id="team-time" type="time" value="17:30" required />
+                </div>
+                <div class="actions">
+                  <button id="create-team-button" type="submit">Create team</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <!-- Selected team -->
+          <div>
+            <div class="card" id="team-detail-card">
+              <h2>Team</h2>
+              <div id="team-detail-state">
+                <div class="empty">Select a team on the left to see today's call.</div>
+              </div>
+              <div id="team-detail" hidden></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      Weather by Open-Meteo, fetched server-side. One recommendation is stored per team per
+      practice date.
+    </footer>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

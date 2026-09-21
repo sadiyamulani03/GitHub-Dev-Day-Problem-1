@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+
+# Local environment / secrets -- NEVER commit these (CHECK 8)
+.env
+.env.*
+!.env.example
+
+# Local SQLite database + WAL sidecar files
+data/
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+
+# Logs / coverage / OS junk
+*.log
+npm-debug.log*
+coverage/
+.nyc_output/
+.DS_Store
+Thumbs.db

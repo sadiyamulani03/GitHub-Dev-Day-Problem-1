@@ -1,0 +1,31 @@
+{
+  "name": "practice-day-outfit-caller",
+  "version": "1.0.0",
+  "private": true,
+  "description": "The Practice-Day Outfit Caller - coaches register their teams' practice fields and get a persisted, forecast-grounded outfit/gear call.",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=20.12.0"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "node --test \"tests/**/*.test.js\"",
+    "test:live": "node --test --test-concurrency=1 tests/live.weather.test.js",
+    "attack": "node scripts/adversarial-check.js",
+    "audit:secrets": "node scripts/secret-scan.js"
+  },
+  "keywords": [
+    "express",
+    "sqlite",
+    "open-meteo",
+    "weather"
+  ],
+  "author": "sadiyamulani03",
+  "license": "MIT",
+  "type": "commonjs",
+  "dependencies": {
+    "better-sqlite3": "^12.11.1",
+    "express": "^4.22.3"
+  }
+}
